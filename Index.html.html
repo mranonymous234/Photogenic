@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ghibli Image Generator</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #fdf6e3;
+      color: #333;
+      max-width: 600px;
+      margin: auto;
+      padding: 2em;
+    }
+    input, button {
+      width: 100%;
+      padding: 0.6em;
+      margin: 0.5em 0;
+      font-size: 1em;
+    }
+    #generated-img {
+      margin-top: 1.5em;
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Ghibli Style Photo Generator</h1>
+  
+  <input id="focus" placeholder="Focus / Subject (e.g. Spirited Away bathhouse at night)" />
+  <input id="adj1" placeholder="Adjective 1 (e.g. dreamy)" />
+  <input id="adj2" placeholder="Adjective 2 (e.g. colorful)" />
+  <input id="vs1" placeholder="Visual Style 1 (e.g. watercolor)" />
+  <input id="vs2" placeholder="Visual Style 2 (e.g. soft lighting)" />
+  <input id="vs3" placeholder="Visual Style 3 (e.g. cinematic composition)" />
+  <input id="artist" placeholder="Artist Reference (e.g. Hayao Miyazaki)" />
+
+  <button onclick="generateImage()">Generate Image</button>
+
+  <img id="generated-img" src="" alt="" />
+
+  <script>
+    function generateImage() {
+      const focus = document.getElementById('focus').value;
+      const adj1 = document.getElementById('adj1').value;
+      const adj2 = document.getElementById('adj2').value;
+      const vs1 = document.getElementById('vs1').value;
+      const vs2 = document.getElementById('vs2').value;
+      const vs3 = document.getElementById('vs3').value;
+      const artist = document.getElementById('artist').value;
+
+      const prompt = `${focus}, ${adj1}, ${adj2}, ${vs1}, ${vs2}, ${vs3}, ${artist}`;
+      const encodedPrompt = encodeURIComponent(prompt);
+      const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}`;
+
+      const img = document.getElementById('generated-img');
+      img.src = imageUrl;
+      img.alt = prompt;
+    }
+  </script>
+</body>
+</html>
